@@ -1,0 +1,107 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Bai5_6_7
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+            #region Bài 5
+
+            double diem;
+            Console.WriteLine("Chương trình xếp loại các học sinh theo điểm trung bình\n");
+            do
+            {
+                Console.Write("Nhập điểm của bạn: ", "\n");
+                diem = double.Parse(Console.ReadLine());
+                if (0 <= diem && diem <= 10)
+                {
+                    if (diem >= 9)
+                    {
+                        Console.WriteLine("Xuất Sắc");
+                    }
+                    else if (diem >= 8)
+                    {
+                        Console.WriteLine("Giỏi");
+                    }
+                    else if (diem >= 6.5)
+                    {
+                        Console.WriteLine("Khá");
+                    }
+                    else if (diem >= 5)
+                    {
+                        Console.WriteLine("Trung Bình");
+                    }
+                    else if (diem >= 3.5)
+                    {
+                        Console.WriteLine("Yếu");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Kém");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Điểm {0} của bạn không đúng", diem);
+                    Console.WriteLine("Vui lòng nhập lại.");
+                }
+            } while (0 >= diem || diem >= 10);
+            Console.ReadKey();
+            #endregion
+
+            #region Bài 6
+
+            Console.WriteLine("Chương trình đổi tiền ra các mệnh giá và xuất ra tương ứng với tờ tiền ít nhất\n");
+            int menhGia50K = 50000;
+            Console.Write("Nhập số tiền (là bội số của 50.000): ");
+            int soTien = Convert.ToInt32(Console.ReadLine());
+            while (soTien % menhGia50K != 0)
+            {
+                Console.WriteLine("Số tiền không đúng là bội số của 50.000. Vui lòng nhập lại.");
+                Console.Write("Nhập số tiền (là bội số của 50.000): ");
+                soTien = Convert.ToInt32(Console.ReadLine());
+            }
+            int[] menhGia = { 500000, 200000, 100000, 50000 };
+            int[] soTo = new int[4];
+            for (int i = 0; i < menhGia.Length; i++)
+            {
+                soTo[i] = soTien / menhGia[i];
+                soTien %= menhGia[i];
+            }
+            for (int i = 0; i < menhGia.Length; i++)
+            {
+                if (soTo[i] > 0)
+                    Console.WriteLine("Mệnh giá {0}: {1} tờ", menhGia[i], soTo[i]);
+            }
+            Console.ReadKey();
+            #endregion
+
+            #region Bài 7
+
+            Console.WriteLine("Chương trình tính tiền điện\n");
+            int Socu, Somoi, soDienTieuThu;
+            Console.Write("Nhập chỉ số điện cũ: ");
+            Socu = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Nhập chỉ số điện mới: ");
+            Somoi = Convert.ToInt32(Console.ReadLine());
+
+            soDienTieuThu = Somoi - Socu;
+            const double VATRate = 0.1; // Tỷ lệ thuế VAT 10%
+            const double GiaBanDien = 3000; // Đơn giá điện tính theo VNĐ/kWh
+            double tienDien = soDienTieuThu * GiaBanDien;
+            double tienDienVAT = tienDien + (tienDien * VATRate);
+            Console.WriteLine("Số điện tiêu thụ: {0}", soDienTieuThu);
+            Console.WriteLine("Tiền điện: {0} VNĐ", tienDien);
+            Console.WriteLine("Tiền điện (đã bao gồm VAT): {0} VNĐ", tienDienVAT);
+            Console.ReadKey();
+            #endregion
+        }
+    }
+}
